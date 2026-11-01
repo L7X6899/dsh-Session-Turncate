@@ -1,5 +1,5 @@
 /**
- * Local harness for dsh-session-turncate surface logic.
+ * Local harness for dsh-session-truncate surface logic.
  * Simulates only the slice of Session the plugin touches: an event log, a
  * surface fold honouring `surfaceOp: replace`, and the append validations from
  * @deepseek-ai/dsh-session that matter for a compaction checkpoint.

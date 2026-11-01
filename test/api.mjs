@@ -1,6 +1,6 @@
 /**
  * Panel API + idle policy harness for dsh-Session-Turncate.
- * Run: node test/api.mjs
+ * Run: node test/test-api.mjs
  */
 import fs from 'node:fs';
 import os from 'node:os';
@@ -136,7 +136,12 @@ check('0 route path', ctx.routes[0]?.path, '/session-turncate/api');
 /* ---------------------------------------------------------------- status -- */
 let res = await makeTransport({ op: 'status', sessionId: 'sess-api' }).run(ctx, {});
 check('1 status code', res.statusCode, 200);
-check('1 status body', res.body, { ok: true, state: { enabled: false, hours: 4, lastCutMs: null, cutCount: 0 } });
+check('1 status enabled', res.body?.state?.enabled, false);
+check('1 status hours', res.body?.state?.hours, 4);
+check('1 status lastCutMs', res.body?.state?.lastCutMs, null);
+check('1 status cutCount', res.body?.state?.cutCount, 0);
+check('1 status nextCutMs', res.body?.state?.nextCutMs, null);
+check('1 status pendingCut', res.body?.state?.pendingCut, false);
 check('1 status is not persisted', readDisk().sessions?.['sess-api'], undefined);
 
 /* ------------------------------------------------------------------- set -- */
@@ -176,7 +181,10 @@ check('5 same-origin allowed', res.statusCode, 200);
 
 /* ------------------------------------------------------------------- cut -- */
 res = await makeTransport({ op: 'cut', sessionId: 'sess-api' }).run(ctx, {});
-check('6 cut without live session', res.statusCode, 409);
+check('6 cut without live session queues', res.statusCode, 200);
+check('6 queued flag', res.body?.queued, true);
+check('6 queued message', typeof res.body?.message === 'string' && res.body.message.includes('排队'), true);
+check('6 pendingCut persisted', readDisk().sessions?.['sess-api']?.pendingCut, true);
 
 const liveSession = makeSession(
   [

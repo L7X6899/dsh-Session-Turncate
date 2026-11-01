@@ -4,7 +4,7 @@
 
 **English**：Per-session idle-time context truncation for DSH Web. After a configurable number of idle hours the older conversation is dropped (no summary), so one long-lived session (e.g. an IM bridge) cannot leak one task into the next.
 
-- 版本：**0.1.1**
+- 版本：**0.1.2**
 - 包名：`dsh-session-turncate`　显示名：`dsh-Session-Turncate`
 - 宿主：`dsh >= 0.2.1-rc.5`（`engines.dsh`）
 - 许可：MIT
@@ -132,6 +132,24 @@ node test/api.mjs        # 33 项：面板接口、空闲策略、来源校验
 ## 失败时的行为
 
 任何异常都只记一条 warn 日志，然后原样继续本轮对话；插件出错不会中断会话。状态文件写入失败时，面板与命令都会明确返回「本次操作未生效」。
+
+## 更新日志
+
+### 0.1.2
+
+- 修复 `/truncate status` 与面板显示 `Invalid Date`：计时字段改名后仍有代码读取旧的 `anchorMs`，现在统一按 `lastActiveMs` 计算「下次截断」。
+- 修复面板「立即截断」报「该会话当前未加载」：宿主补齐 `sessions` / `agents` 服务注入，并在确实无法解析内存会话时把请求排队，下一次输入时执行截断。
+- 面板状态行新增「下次」时间与排队提示；时间格式统一为 `YYYY-MM-DD HH:mm`。
+- 统一日志前缀为 `session-turncate:`。
+
+### 0.1.1
+
+- 新增会话上方的「上下文截断」选项卡（空闲总开关 + 0–24 小时数字输入）。
+- 计时语义从「固定间隔」改为「空闲超时」：每次输入都会刷新计时。
+
+### 0.1.0
+
+- 首个版本：按会话的定时上下文截断，四事件 compaction 事务，`/truncate on|off|now|status` 命令。
 
 ## License
 

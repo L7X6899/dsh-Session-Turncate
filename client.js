@@ -341,9 +341,12 @@ window.__ModuleLoader__.load({
           primaryButton('保存', () => save(), busy),
           ghostButton('立即截断', cutNow, busy),
           h('div', { style: { fontSize: 12.5, color: C.faint } },
-            `上次截断：${formatTime(state.lastCutMs)}　累计 ${times} 次`),
+            `上次截断：${formatTime(state.lastCutMs)}　累计 ${times} 次　下次：${state.nextCutMs ? formatTime(state.nextCutMs) : '待计时'}`),
         ),
 
+        state.pendingCut === true
+          ? h('div', { style: { fontSize: 13, color: C.brand } }, '已排队：该会话下一次有输入时会立即截断。')
+          : null,
         notice ? h('div', { style: { fontSize: 13, color: C.brand } }, notice) : null,
         failure ? h('div', { style: { fontSize: 13, color: C.error } }, failure) : null,
         hint('命令同样可用：/truncate on 4、/truncate off、/truncate now、/truncate status。'),
