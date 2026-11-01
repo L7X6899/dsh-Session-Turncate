@@ -1,0 +1,58 @@
+{
+  "name": "dsh-session-turncate",
+  "version": "0.1.1",
+  "description": "针对单个会话的定时上下文截断插件：可配置多少小时无输入之后，丢弃较早的对话（不生成摘要），避免同一个长期会话把上一个任务带进下一个。 / Per-session idle-time context truncation for DSH Web: after a configurable number of idle hours the older conversation is dropped (no summary), so one long-lived session (e.g. an IM bridge) cannot leak one task into the next.",
+  "type": "module",
+  "main": "lib/index.js",
+  "exports": {
+    ".": {
+      "default": "./lib/index.js"
+    },
+    "./client": "./client.js",
+    "./cordis.patch.yml": "./cordis.patch.yml",
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "lib",
+    "client.js",
+    "cordis.patch.yml",
+    "README.md"
+  ],
+  "dsh": {
+    "bundle": {
+      "patch": "./cordis.patch.yml"
+    },
+    "client": {
+      "platform": "web",
+      "inject": [
+        "@deepseek-ai/dsh-client-connection",
+        "@deepseek-ai/dsh-client-ui-conversation"
+      ]
+    }
+  },
+  "keywords": [
+    "dsh",
+    "deepseek-harness",
+    "plugin",
+    "context",
+    "truncate",
+    "compaction",
+    "session",
+    "idle",
+    "im"
+  ],
+  "license": "MIT",
+  "displayName": "dsh-Session-Turncate",
+  "author": "L7x",
+  "homepage": "https://github.com/L7X6899/dsh-Session-Turncate#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/L7X6899/dsh-Session-Turncate.git"
+  },
+  "bugs": {
+    "url": "https://github.com/L7X6899/dsh-Session-Turncate/issues"
+  },
+  "engines": {
+    "dsh": ">=0.2.1-rc.5"
+  }
+}
