@@ -108,7 +108,9 @@ dsh plugin --profile desktop add github:L7X6899/dsh-Session-Turncate
 
 桌面端也可以走应用内的 **设置 → 插件** 安装。装完**重启 DSH**（宿主按 ESM 模块缓存加载插件）。
 
-**从 npm**
+**从 npm（暂未发布）**
+
+`dsh-session-turncate` 还没有发布到 npm registry，在你看到它出现在 npmjs.com 之前，下面这条命令会失败；请用上面的 GitHub 方式。
 
 ```sh
 npm i dsh-session-turncate
@@ -120,13 +122,14 @@ npm i dsh-session-turncate
 
 ## 自测
 
-仓库自带四个纯 Node 测试脚本，直接模拟 session 与宿主 ctx，不需要启动 DSH：
+仓库自带五个纯 Node 测试脚本，直接模拟 session 与宿主 ctx，不需要启动 DSH：
 
 ```sh
 node test/truncate.mjs   # 32 项：区间选择与 surface 替换
 node test/receipt.mjs    # 11 项：回执注入与状态落盘
-node test/fixes.mjs      # 21 项：边界与回归
-node test/api.mjs        # 33 项：面板接口、空闲策略、来源校验
+node test/fixes.mjs      # 20 项：边界与回归
+node test/api.mjs        # 41 项：面板接口、空闲策略、来源校验、排队截断
+node test/fix012.mjs     # 16 项：0.1.2 回归（Invalid Date、lastActiveMs、排队执行）
 ```
 
 ## 失败时的行为
