@@ -4,7 +4,9 @@
 
 **English**：Per-session idle-time context truncation for DSH Web. After a configurable number of idle hours the older conversation is dropped (no summary), so one long-lived session (e.g. an IM bridge) cannot leak one task into the next.
 
-- 版本：**0.1.2**
+[![npm](https://img.shields.io/npm/v/dsh-session-turncate?color=cb3837&logo=npm)](https://www.npmjs.com/package/dsh-session-turncate) [![license](https://img.shields.io/npm/l/dsh-session-turncate)](LICENSE)
+
+- 版本：**0.1.2**（npm 已发布）
 - 包名：`dsh-session-turncate`　显示名：`dsh-Session-Turncate`
 - 宿主：`dsh >= 0.2.1-rc.5`（`engines.dsh`）
 - 许可：MIT
@@ -108,13 +110,15 @@ dsh plugin --profile desktop add github:L7X6899/dsh-Session-Turncate
 
 桌面端也可以走应用内的 **设置 → 插件** 安装。装完**重启 DSH**（宿主按 ESM 模块缓存加载插件）。
 
-**从 npm（暂未发布）**
-
-`dsh-session-turncate` 还没有发布到 npm registry，在你看到它出现在 npmjs.com 之前，下面这条命令会失败；请用上面的 GitHub 方式。
+**从 npm**
 
 ```sh
-npm i dsh-session-turncate
+npm i dsh-session-turncate@0.1.2
+# 或装进当前 profile
+dsh plugin --profile desktop add dsh-session-turncate
 ```
+
+包页：<https://www.npmjs.com/package/dsh-session-turncate>（`dist-tag latest` = `0.1.2`）。
 
 **本机开发目录**
 
@@ -144,6 +148,7 @@ node test/fix012.mjs     # 16 项：0.1.2 回归（Invalid Date、lastActiveMs�
 - 修复面板「立即截断」报「该会话当前未加载」：宿主补齐 `sessions` / `agents` 服务注入，并在确实无法解析内存会话时把请求排队，下一次输入时执行截断。
 - 面板状态行新增「下次」时间与排队提示；时间格式统一为 `YYYY-MM-DD HH:mm`。
 - 统一日志前缀为 `session-turncate:`。
+- 发布到 npm：`dsh-session-turncate@0.1.2`，`dist-tag latest` 指向该版本。
 
 ### 0.1.1
 
