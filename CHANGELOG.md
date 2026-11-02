@@ -12,6 +12,7 @@
 - Panel status line shows the next scheduled cut and a queued-cut notice.
 - Timestamps are formatted as `YYYY-MM-DD HH:mm` instead of locale output.
 - Log prefix is `session-turncate:` everywhere.
+- Published to npm as `dsh-session-turncate@0.1.2` (`dist-tag latest`).
 
 ## 0.1.1
 
