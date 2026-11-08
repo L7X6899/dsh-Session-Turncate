@@ -1,6 +1,6 @@
 {
   "name": "dsh-session-turncate",
-  "version": "0.1.2",
+  "version": "0.1.4",
   "description": "针对单个会话的定时上下文截断插件：可配置多少小时无输入之后，丢弃较早的对话（不生成摘要），避免同一个长期会话把上一个任务带进下一个。 / Per-session idle-time context truncation for DSH Web: after a configurable number of idle hours the older conversation is dropped (no summary), so one long-lived session (e.g. an IM bridge) cannot leak one task into the next.",
   "type": "module",
   "main": "lib/index.js",
@@ -53,6 +53,6 @@
     "url": "https://github.com/L7X6899/dsh-Session-Turncate/issues"
   },
   "engines": {
-    "dsh": ">=0.2.1-rc.5"
+    "dsh": ">=0.2.1-rc.3"
   }
 }

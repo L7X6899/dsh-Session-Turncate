@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.1.4
+
+### Changed
+
+- `engines.dsh` is now `>=0.2.1-rc.3` (was `>=0.2.1-rc.5`). The old range made DSH 0.2.1-rc.3 report the package as `incompatible-version`, so the plugin and its «上下文截断» tab were never loaded on that runtime.
+- No runtime code change: `lib/index.js` and `client.js` are byte-identical to 0.1.2. Verified against DSH 0.2.1-rc.3 that every host API this plugin uses is present (`sessions`, `agents`, `commands`, `webServer`, the `compaction/*` events, the `compact-checkpoint` source and the `surfaceOp` replace op).
+
 ## 0.1.2
 
 ### Fixed

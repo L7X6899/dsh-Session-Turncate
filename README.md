@@ -6,9 +6,9 @@
 
 [![npm](https://img.shields.io/npm/v/dsh-session-turncate?color=cb3837&logo=npm)](https://www.npmjs.com/package/dsh-session-turncate) [![license](https://img.shields.io/npm/l/dsh-session-turncate)](LICENSE)
 
-- 版本：**0.1.2**（npm 已发布）
+- 版本：**0.1.4**（npm 已发布）
 - 包名：`dsh-session-turncate`　显示名：`dsh-Session-Turncate`
-- 宿主：`dsh >= 0.2.1-rc.5`（`engines.dsh`）
+- 宿主：`dsh >= 0.2.1-rc.3`（`engines.dsh`）—— 0.2.1 的 rc.3 与更高版本都可安装；更早的 0.2.0 未验证。
 - 许可：MIT
 
 ## 解决什么问题
@@ -113,12 +113,12 @@ dsh plugin --profile desktop add github:L7X6899/dsh-Session-Turncate
 **从 npm**
 
 ```sh
-npm i dsh-session-turncate@0.1.2
+npm i dsh-session-turncate@0.1.4
 # 或装进当前 profile
 dsh plugin --profile desktop add dsh-session-turncate
 ```
 
-包页：<https://www.npmjs.com/package/dsh-session-turncate>（`dist-tag latest` = `0.1.2`）。
+包页：<https://www.npmjs.com/package/dsh-session-turncate>（`dist-tag latest` = `0.1.4`）。
 
 **本机开发目录**
 
@@ -141,6 +141,12 @@ node test/fix012.mjs     # 16 项：0.1.2 回归（Invalid Date、lastActiveMs�
 任何异常都只记一条 warn 日志，然后原样继续本轮对话；插件出错不会中断会话。状态文件写入失败时，面板与命令都会明确返回「本次操作未生效」。
 
 ## 更新日志
+
+### 0.1.4
+
+- 放宽 `engines.dsh`：从 `>=0.2.1-rc.5` 改为 `>=0.2.1-rc.3`。旧声明会让运行在 **DSH 0.2.1-rc.3** 上的实例把本插件判为 `incompatible-version`，插件连同它的「上下文截断」选项卡都不会加载 —— 0.2.1-rc.3 上必须用这个版本。
+- 代码逻辑与 0.1.2 完全一致（逐字节相同），只是宿主版本门槛与版本号提升。
+- 已在 DSH 0.2.1-rc.3 运行时核对本插件用到的全部宿主 API（`sessions` / `agents` / `commands` / `webServer`、`compaction/*` 事件、`compact-checkpoint` 来源、`surfaceOp` 合并操作）均存在。
 
 ### 0.1.2
 
